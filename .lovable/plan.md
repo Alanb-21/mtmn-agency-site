@@ -1,32 +1,43 @@
 
 
-## Step 5: Build the Services Page (/services)
+## Steps 6 & 7: Build Process Page (/process) and About Page (/about)
 
-### New file: `src/pages/Services.tsx`
+### Overview
+Two new page components and a routing update. Three files touched total. No existing pages, Nav, or Footer modified.
 
-**Hero section**
-- Padding `py-16 px-10`, border bottom `var(--mtmn-border)`
-- Headline: "What We Do" — `font-inter font-extrabold uppercase text-primary`, `clamp(36px, 5vw, 64px)`, `letter-spacing -0.03em`
-- Subtext: "Three services. One goal — your business performing better online." — `font-cormorant font-light italic text-secondary`, 21px
+### File 1: `src/pages/Process.tsx` (new)
 
-**Three service sections** (stacked, each with border bottom)
-- Padding `py-14 px-10`
-- Service number + headline row: number in `font-cormorant font-light italic` muted, name in `font-inter font-extrabold uppercase text-primary` ~26px
-- Description paragraph: `font-cormorant font-light text-secondary`, 21px, `line-height 1.65`, `max-w-[680px]`
-- "What's included" label: `font-inter font-medium text-[9px] uppercase`, muted, `letter-spacing 0.22em`
-- Included items: `font-cormorant font-light italic text-secondary`, 18px, each preceded by a short decorative line
+**Hero** — `py-16 px-10`, border bottom, "HOW WE WORK" headline (`font-inter font-black uppercase`, `clamp(40px, 5vw, 72px)`), Cormorant italic subtext.
 
-**Service content:**
-1. **01 — Web Design & Build**: Description as specified. Items: Custom design, Mobile-first build, Contact forms & booking systems, SEO ready, Fast loading
-2. **02 — UX & Booking Systems**: Description as specified. Items: Booking system integration, Contact form build, User journey mapping, Simple automations
-3. **03 — Ongoing Support**: Description as specified. Items: Post-launch maintenance, Content updates, Long-term partnership
+**Six step rows** — data array mapped to rows. Each row: border bottom, `py-7 px-10`, flex layout with three columns:
+- Number (Cormorant 300 italic, 16px, muted, `w-[60px]`)
+- Step name (Inter 900 uppercase, `clamp(20px, 2.5vw, 28px)`, `w-[300px]`)
+- Description (Cormorant 300, 19px, `flex-1`)
 
-**CTA strip** (reuses same pattern as Home page)
-- "Ready to start?" headline, "Book a discovery call" filled button linking to `/contact`
+Steps: Discovery Call, Proposal, Design & Build, Review & Approve, Launch, Ongoing Support — all content as specified.
 
-### Modified file: `src/App.tsx`
-- Import `Services` page, add route `<Route path="/services" element={<Services />} />`
+**CTA strip** — `py-20 px-10`, flex between, "START WITH A CONVERSATION." headline left, filled "Book a discovery call" button right → `/contact`.
+
+### File 2: `src/pages/About.tsx` (new)
+
+**Hero** — Same pattern as Process. "ABOUT MTMN" headline, Cormorant italic subtext.
+
+**Mission** — Two-column grid (`md:grid-cols-2`, `gap-16`). Left: "OUR MISSION" label + "We Move The Needle." headline. Right: two Cormorant paragraphs.
+
+**Approach** — "OUR APPROACH" label, Cormorant italic headline "Built with you. Not just for you." (`clamp(32px, 4vw, 52px)`), single paragraph `max-w-[680px]`.
+
+**Values** — "WHAT WE BELIEVE" label, four-column grid (`md:grid-cols-2 lg:grid-cols-4`), each card with border-right (last none), `px-8 py-6`. Title (Inter 700, 13px) + description (Cormorant 300 italic, 18px). Four values: Premium by default, Always personal, Results over vanity, Long-term partnership.
+
+**CTA strip** — "WORK WITH US." headline, "Let's talk" button → `/contact`.
+
+### File 3: `src/App.tsx` (modified)
+
+Add two imports and two routes above the catch-all:
+```
+<Route path="/process" element={<Process />} />
+<Route path="/about" element={<About />} />
+```
 
 ### Files NOT touched
-Nav, Footer, Index, no other files.
+Nav, Footer, Index, Services, no other files.
 
