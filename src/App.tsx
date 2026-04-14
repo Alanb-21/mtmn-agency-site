@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Index from "./pages/Index.tsx";
+import Services from "./pages/Services.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
