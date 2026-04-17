@@ -6,24 +6,24 @@
   :root {
     /* MTMN Three-colour palette (HSL) */
     --background: 0 0% 0%;
-    --foreground: 213 47% 91%;
+    --foreground: 187 100% 50%;
 
-    --primary: 213 47% 91%;
+    --primary: 187 100% 50%;
     --primary-foreground: 0 0% 0%;
 
     --secondary: 0 0% 100%;
     --secondary-foreground: 0 0% 0%;
 
     --card: 0 0% 0%;
-    --card-foreground: 213 47% 91%;
+    --card-foreground: 187 100% 50%;
 
     --popover: 0 0% 0%;
-    --popover-foreground: 213 47% 91%;
+    --popover-foreground: 187 100% 50%;
 
-    --muted: 213 47% 91%;
+    --muted: 187 100% 50%;
     --muted-foreground: 213 20% 55%;
 
-    --accent: 213 47% 91%;
+    --accent: 187 100% 50%;
     --accent-foreground: 0 0% 0%;
 
     --destructive: 0 84.2% 60.2%;
@@ -32,26 +32,26 @@
     /* Derived opacity borders/states — use via CSS custom properties */
     --border: 213 20% 18%;
     --input: 213 20% 18%;
-    --ring: 213 47% 91%;
+    --ring: 187 100% 50%;
 
     --radius: 0px;
 
     /* Sidebar (unused Phase 1, but kept for shadcn compat) */
     --sidebar-background: 0 0% 0%;
-    --sidebar-foreground: 213 47% 91%;
-    --sidebar-primary: 213 47% 91%;
+    --sidebar-foreground: 187 100% 50%;
+    --sidebar-primary: 187 100% 50%;
     --sidebar-primary-foreground: 0 0% 0%;
     --sidebar-accent: 213 20% 18%;
-    --sidebar-accent-foreground: 213 47% 91%;
+    --sidebar-accent-foreground: 187 100% 50%;
     --sidebar-border: 213 20% 18%;
-    --sidebar-ring: 213 47% 91%;
+    --sidebar-ring: 187 100% 50%;
 
     /* MTMN opacity tokens (raw rgba for direct use) */
-    --mtmn-border: rgba(222, 231, 241, 0.08);
-    --mtmn-ghost-stroke: rgba(222, 231, 241, 0.15);
-    --mtmn-muted: rgba(222, 231, 241, 0.35);
-    --mtmn-hover-bg: rgba(222, 231, 241, 0.03);
-    --mtmn-dim: rgba(222, 231, 241, 0.12);
+    --mtmn-border: rgba(0, 229, 255, 0.08);
+    --mtmn-ghost-stroke: rgba(0, 229, 255, 0.15);
+    --mtmn-muted: rgba(0, 229, 255, 0.35);
+    --mtmn-hover-bg: rgba(0, 229, 255, 0.03);
+    --mtmn-dim: rgba(0, 229, 255, 0.12);
   }
 }
 
