@@ -1,33 +1,21 @@
 
 
-## Step 9: Build the Contact Page (/contact)
+## Update primary colour to cyan #00E5FF
 
-### New file: `src/pages/Contact.tsx`
+### File: `src/index.css`
 
-**Hero** — `py-16 px-10`, border bottom. "LET'S WORK TOGETHER" headline (`font-inter font-black uppercase text-primary`, `clamp(40px, 5vw, 72px)`, `letter-spacing -0.03em`). Subtext as specified, Cormorant italic 21px.
+**Changes:**
+1. Update `--primary` token from `213 47% 91%` to `187 100% 50%` (HSL for #00E5FF)
+2. Update `--ring` from `213 47% 91%` to `187 100% 50%` (matches primary)
+3. Update `--accent` from `213 47% 91%` to `187 100% 50%` (matches primary)
+4. Update `--card-foreground`, `--popover-foreground`, `--foreground`, `--muted` — these all currently use `213 47% 91%` (the old #DEE7F1). Change all to `187 100% 50%`.
+5. Update `--sidebar-foreground`, `--sidebar-primary`, `--sidebar-ring` — same change.
 
-**Two-column layout** — `md:grid-cols-2`, border bottom.
-
-**Left column — Enquiry form** (`py-14 px-10`, border right):
-- "SEND AN ENQUIRY" section label (9px Inter, muted, `tracking-[0.22em]`, `mb-8`)
-- React state for form fields + `submitted` boolean + `errors` object
-- Five fields: Full Name, Business Name, Email, Phone (optional), Project Description (textarea, rows 4)
-- Labels: Inter 500, 10px uppercase, `tracking-[0.14em]`, `mb-1.5`
-- Inputs: custom styled — transparent bg, only bottom border (`var(--mtmn-border)`), no radius, `py-3`, Cormorant light 18px, focus border `#DEE7F1`
-- Validation on submit: required fields checked, email format validated. Inline error messages below failed fields (Cormorant italic, 14px, `rgba(222,231,241,0.5)`)
-- Submit button: full width, `bg-primary text-background`, Inter bold 10px uppercase, `py-4`, `mt-8`, `rounded-none`
-- Success state: form replaced with centred "Thank you" message (Cormorant italic 21px). No backend call — just local state toggle for now.
-
-**Right column — Contact methods** (`py-14 px-10`):
-- "OR REACH OUT DIRECTLY" section label
-- Four rows mapped from data array, each: `py-5`, border bottom, flex between, hover bg `rgba(222,231,241,0.03)`, transition
-- Each row: label (Inter 10px uppercase) + detail (Cormorant italic 18px) left, arrow `↗` right (muted → primary on hover)
-- WhatsApp, LinkedIn, Email (mailto), Book a Call — external links open `target="_blank" rel="noopener noreferrer"`
-
-### Modified file: `src/App.tsx`
-
-Add import and route `<Route path="/contact" element={<Contact />} />` above catch-all.
+Note: `index.css` does not contain literal `#DEE7F1` or `hsl(var(--primary))` strings — the colour lives in HSL tokens. The MTMN opacity tokens (`--mtmn-border`, `--mtmn-muted`, etc.) use literal `rgba(222, 231, 241, ...)` which is #DEE7F1. Per your instruction to replace every #DEE7F1, these will be converted to `rgba(0, 229, 255, ...)` keeping their existing alpha values.
 
 ### Files NOT touched
-Nav, Footer, Index, Services, Process, About, Work.
+Tailwind config, all pages, Nav, Footer, components.
+
+### Heads-up
+This will turn every primary text element, button background, border tint, and muted text across the entire site cyan. The "three colours only" core memory rule (#000, #DEE7F1, #fff) will be violated by this change — confirming you want to proceed anyway.
 
