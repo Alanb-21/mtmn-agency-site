@@ -1,21 +1,40 @@
 
 
-## Update primary colour to cyan #00E5FF
+## Add scroll-triggered fade-up animations site-wide
 
-### File: `src/index.css`
+### Approach
+Use `framer-motion`'s `whileInView` API with `viewport={{ once: true }}` to trigger animations once per element as they enter the viewport. Build two small reusable wrappers so every page gets identical behaviour without rewriting markup styles.
 
-**Changes:**
-1. Update `--primary` token from `213 47% 91%` to `187 100% 50%` (HSL for #00E5FF)
-2. Update `--ring` from `213 47% 91%` to `187 100% 50%` (matches primary)
-3. Update `--accent` from `213 47% 91%` to `187 100% 50%` (matches primary)
-4. Update `--card-foreground`, `--popover-foreground`, `--foreground`, `--muted` — these all currently use `213 47% 91%` (the old #DEE7F1). Change all to `187 100% 50%`.
-5. Update `--sidebar-foreground`, `--sidebar-primary`, `--sidebar-ring` — same change.
+### New file: `src/components/motion/AnimatedSection.tsx`
+A wrapper around `motion.section` that:
+- Accepts all standard section props (`className`, `style`, `children`)
+- Sets `initial={{ opacity: 0, y: 40 }}`, `whileInView={{ opacity: 1, y: 0 }}`
+- `transition={{ duration: 0.6, ease: "easeOut" }}`
+- `viewport={{ once: true, amount: 0.2 }}` so it triggers once when 20% visible
+- Provides a `staggerChildren: 0.1` variant context so child `AnimatedItem`s cascade
 
-Note: `index.css` does not contain literal `#DEE7F1` or `hsl(var(--primary))` strings — the colour lives in HSL tokens. The MTMN opacity tokens (`--mtmn-border`, `--mtmn-muted`, etc.) use literal `rgba(222, 231, 241, ...)` which is #DEE7F1. Per your instruction to replace every #DEE7F1, these will be converted to `rgba(0, 229, 255, ...)` keeping their existing alpha values.
+### New file: `src/components/motion/AnimatedItem.tsx`
+A wrapper around `motion.div` (with optional `as` prop for `h1`, `p`, etc., or just used as a generic wrapper) that:
+- Uses variants `{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }`
+- Inherits stagger timing from parent `AnimatedSection`
+- `transition={{ duration: 0.6, ease: "easeOut" }}`
+
+### Install
+- `framer-motion` via package manager
+
+### Page edits (6 files)
+For each page (`Index.tsx`, `Services.tsx`, `Process.tsx`, `About.tsx`, `Work.tsx`, `Contact.tsx`):
+- Replace each top-level `<section>` with `<AnimatedSection>` (preserves all existing className, style, borders, padding)
+- Wrap the headline, body text, and CTA/button groupings inside each section with `<AnimatedItem>` so they stagger in order: headline → body → CTA
+
+No changes to colours, fonts, spacing, layout classes, or existing styles. No changes to `Nav.tsx` or `Footer.tsx`.
+
+### Files touched
+- `package.json` (framer-motion install)
+- `src/components/motion/AnimatedSection.tsx` (new)
+- `src/components/motion/AnimatedItem.tsx` (new)
+- `src/pages/Index.tsx`, `Services.tsx`, `Process.tsx`, `About.tsx`, `Work.tsx`, `Contact.tsx` (wrap sections + key elements)
 
 ### Files NOT touched
-Tailwind config, all pages, Nav, Footer, components.
-
-### Heads-up
-This will turn every primary text element, button background, border tint, and muted text across the entire site cyan. The "three colours only" core memory rule (#000, #DEE7F1, #fff) will be violated by this change — confirming you want to proceed anyway.
+`Nav.tsx`, `Footer.tsx`, `App.tsx`, `index.css`, `tailwind.config.ts`, all UI components.
 
