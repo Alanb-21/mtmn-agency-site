@@ -8,30 +8,42 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-background py-5 px-10 max-md:px-5 border-t border-border">
+    <footer
+      className="w-full bg-background py-5 px-10 max-md:px-5"
+      style={{ borderTop: "1px solid var(--mtmn-border)" }}
+    >
       <div className="flex items-center justify-between max-md:flex-col max-md:gap-6 max-md:text-center">
+        {/* Logo */}
         <Link
           to="/"
-          className="font-inter font-extrabold uppercase text-foreground text-xs"
-          style={{ letterSpacing: "0.18em" }}
+          className="font-inter font-black uppercase text-primary text-xs"
+          style={{ letterSpacing: "0.24em" }}
         >
-          MTMN DIGITAL
+          MTMN
         </Link>
 
+        {/* Centre links */}
         <div className="flex items-center gap-6">
           {footerLinks.map(({ label, href, external }) => (
             <a
               key={label}
               href={href}
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="font-cormorant italic text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="font-cormorant font-light italic text-sm transition-colors duration-200"
+              style={{ color: "var(--mtmn-muted)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(var(--secondary))")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--mtmn-muted)")}
             >
               {label}
             </a>
           ))}
         </div>
 
-        <span className="font-inter font-normal text-[10px] text-muted-foreground">
+        {/* Copyright */}
+        <span
+          className="font-inter font-normal text-[10px]"
+          style={{ color: "var(--mtmn-dim)" }}
+        >
           © 2026 MTMN Digital
         </span>
       </div>

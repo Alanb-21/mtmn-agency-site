@@ -1,244 +1,412 @@
 import { Link } from "react-router-dom";
-import Reveal from "@/components/Reveal";
+import { ArrowUpRight } from "lucide-react";
+import AnimatedSection from "@/components/motion/AnimatedSection";
+import AnimatedItem from "@/components/motion/AnimatedItem";
 
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80";
+/* ─── Section border helper ─── */
+const sectionBorder = { borderBottom: "1px solid var(--mtmn-border)" };
 
-const niches = [
-  "Dental & Clinics",
-  "Physiotherapy",
-  "Legal & Accountancy",
-  "Trades & Engineering",
-  "More",
-];
-
-const services = [
-  {
-    num: "01",
-    name: "Website Design & Build",
-    outcome: "A site that turns visitors into enquiries — not just a digital brochure.",
-    features: [
-      "Custom design built to your brand",
-      "Mobile-first, fast-loading",
-      "Contact form + WhatsApp CTA",
-      "Google-ready from day one",
-    ],
-    price: "From €[PLACEHOLDER]",
-  },
-  {
-    num: "02",
-    name: "SEO & Local Search",
-    outcome: "Appear when your ideal client searches for you in your town.",
-    features: [
-      "Local keyword research",
-      "On-page SEO setup",
-      "Google Business Profile",
-      "Monthly rank reporting",
-    ],
-    price: "From €[PLACEHOLDER]/mo",
-  },
-  {
-    num: "03",
-    name: "Paid Social",
-    outcome: "Facebook & Instagram ads that generate leads, not just likes.",
-    features: [
-      "Ad creative + copywriting",
-      "Audience targeting",
-      "Weekly optimisation",
-      "Transparent reporting",
-    ],
-    price: "From €25/mo",
-  },
-];
-
-/* ─── HERO ─── */
+/* ─────────────────────────────────────────────
+   SECTION 1 — HERO
+   ───────────────────────────────────────────── */
 const Hero = () => (
-  <section
-    className="grid md:grid-cols-2 min-h-[100vh] max-md:min-h-[85vh] border-b border-border"
+  <AnimatedSection
+    className="min-h-screen flex flex-col justify-between px-10 max-md:px-5 pt-16 pb-12"
+    style={sectionBorder}
   >
-    {/* Left content */}
-    <Reveal
-      className="flex flex-col justify-center"
-      style={{ paddingLeft: "clamp(20px, 6vw, 96px)", paddingRight: "clamp(20px, 4vw, 48px)" }}
-    >
-      <span
-        className="font-inter font-medium uppercase text-muted-foreground"
-        style={{ fontSize: "13px", letterSpacing: "0.15em" }}
-      >
-        IRISH DIGITAL AGENCY
-      </span>
-
-      <h1
-        className="font-inter font-black uppercase text-foreground mt-6"
-        style={{
-          fontSize: "clamp(52px, 8vw, 110px)",
-          lineHeight: 0.95,
-          letterSpacing: "-0.03em",
-        }}
-      >
-        Websites That
-        <br />
-        Win Clients.
-      </h1>
-
-      <p
-        className="font-cormorant italic text-muted-foreground mt-6 max-w-[560px]"
-        style={{ fontSize: "clamp(18px, 2vw, 24px)", lineHeight: 1.5 }}
-      >
-        Built for Irish dentists, solicitors, physiotherapists & tradespeople who want
-        more from their online presence.
-      </p>
-
-      <div className="flex items-center gap-4 mt-10 max-md:flex-col max-md:items-stretch">
-        <Link
-          to="/contact"
-          className="bg-primary text-primary-foreground font-inter font-bold uppercase text-center hover:opacity-90 transition-opacity"
-          style={{ fontSize: "13px", letterSpacing: "0.08em", padding: "14px 32px" }}
-        >
-          Book a Free Call
-        </Link>
-        <Link
-          to="/work"
-          className="border border-primary text-primary font-inter font-bold uppercase text-center hover:bg-primary hover:text-primary-foreground transition-colors"
-          style={{ fontSize: "13px", letterSpacing: "0.08em", padding: "13px 31px" }}
-        >
-          See Our Work
-        </Link>
-      </div>
-
-      <p
-        className="font-inter font-medium text-muted-foreground mt-8"
-        style={{ fontSize: "12px" }}
-      >
-        ⬤ [PLACEHOLDER: X clients] across Ireland · Est. 2026
-      </p>
-    </Reveal>
-
-    {/* Right image — hidden on mobile */}
-    <div className="hidden md:block relative overflow-hidden">
-      <img
-        src={HERO_IMAGE}
-        alt="Dark editorial workspace"
-        className="w-full h-full object-cover"
-        loading="eager"
-      />
-    </div>
-  </section>
-);
-
-/* ─── NICHE TRUST BAR ─── */
-const NicheBar = () => (
-  <Reveal
-    as="section"
-    className="border-b border-border flex flex-col items-center justify-center text-center"
-    style={{ minHeight: "120px", paddingTop: "32px", paddingBottom: "32px" }}
-  >
-    <span
-      className="font-inter font-medium uppercase text-muted-foreground"
-      style={{ fontSize: "12px", letterSpacing: "0.15em" }}
-    >
-      TRUSTED BY IRISH BUSINESSES IN
-    </span>
-
-    <div className="flex flex-wrap items-center justify-center gap-x-0 gap-y-3 mt-5 px-5">
-      {niches.map((n, i) => (
+    {/* Eyebrow */}
+    <AnimatedItem>
+      <div className="flex items-center gap-3">
+        <span className="block w-8 h-px" style={{ background: "var(--mtmn-muted)" }} />
         <span
-          key={n}
-          className="font-inter font-medium uppercase text-foreground px-6"
+          className="font-inter font-normal text-[10px] uppercase"
+          style={{ letterSpacing: "0.2em", color: "var(--mtmn-muted)" }}
+        >
+          Irish Digital Agency
+        </span>
+      </div>
+    </AnimatedItem>
+
+    {/* Headline */}
+    <AnimatedItem className="my-auto py-12">
+      {[
+        { text: "We make", ghost: false },
+        { text: "businesses", ghost: true },
+        { text: "look exceptional", ghost: false },
+        { text: "online.", ghost: true },
+      ].map(({ text, ghost }, i) => (
+        <h1
+          key={i}
+          className="font-inter font-black uppercase"
           style={{
-            fontSize: "14px",
-            borderRight: i < niches.length - 1 ? "1px solid hsl(var(--border))" : "none",
+            fontSize: "clamp(56px, 8.5vw, 118px)",
+            lineHeight: 0.9,
+            letterSpacing: "-0.04em",
+            ...(ghost
+              ? {
+                  color: "transparent",
+                  WebkitTextStroke: "1.5px var(--mtmn-ghost-stroke)",
+                }
+              : {
+                  color: "hsl(var(--primary))",
+                }),
           }}
         >
-          {n}
-        </span>
+          {text}
+        </h1>
       ))}
-    </div>
-  </Reveal>
-);
+    </AnimatedItem>
 
-/* ─── SERVICES ─── */
-const Services = () => (
-  <Reveal
-    as="section"
-    className="border-b border-border"
-    style={{ paddingLeft: "clamp(20px, 6vw, 96px)", paddingRight: "clamp(20px, 6vw, 96px)", paddingTop: "96px", paddingBottom: "96px" }}
-  >
-    <span
-      className="font-inter font-medium uppercase text-muted-foreground block"
-      style={{ fontSize: "12px", letterSpacing: "0.15em" }}
-    >
-      WHAT WE DO
-    </span>
-
-    <h2
-      className="font-inter font-extrabold text-foreground mt-4 max-w-[1000px]"
-      style={{
-        fontSize: "clamp(36px, 5vw, 64px)",
-        lineHeight: 1.05,
-        letterSpacing: "-0.02em",
-      }}
-    >
-      Everything your business needs online.
-    </h2>
-
-    <div className="grid md:grid-cols-3 gap-6 mt-16">
-      {services.map((s) => (
-        <article
-          key={s.num}
-          className="bg-card border border-border flex flex-col"
-          style={{ padding: "40px" }}
+    {/* Bottom row */}
+    <AnimatedItem>
+      <div className="flex items-end justify-between max-md:flex-col max-md:items-start max-md:gap-8">
+        <p
+          className="font-cormorant font-light italic text-secondary max-w-[440px]"
+          style={{ fontSize: "21px", lineHeight: 1.65 }}
         >
-          <span
-            className="font-inter font-extrabold uppercase text-muted-foreground"
-            style={{ fontSize: "11px", letterSpacing: "0.2em" }}
-          >
-            {s.num}
-          </span>
+          Premium websites built for Irish professionals. Designed with you, not just for you
+          — from the first call to going live and long after.
+        </p>
 
-          <h3
-            className="font-inter font-extrabold text-foreground mt-6"
-            style={{ fontSize: "22px", lineHeight: 1.2 }}
+        <div className="flex items-center gap-6">
+          <Link
+            to="/contact"
+            className="font-inter font-bold text-[10px] uppercase bg-primary text-primary-foreground transition-opacity duration-200 hover:opacity-85"
+            style={{ letterSpacing: "0.14em", padding: "12px 28px" }}
           >
-            {s.name}
-          </h3>
-
-          <p
-            className="font-cormorant italic text-muted-foreground mt-3"
-            style={{ fontSize: "17px", lineHeight: 1.5 }}
+            Start a project
+          </Link>
+          <Link
+            to="/work"
+            className="font-inter font-normal text-[10px] uppercase transition-colors duration-200"
+            style={{ letterSpacing: "0.08em", color: "var(--mtmn-muted)" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(var(--primary))")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--mtmn-muted)")}
           >
-            {s.outcome}
-          </p>
-
-          <ul className="flex flex-col gap-2 mt-8">
-            {s.features.map((f) => (
-              <li
-                key={f}
-                className="font-inter text-muted-foreground"
-                style={{ fontSize: "14px", lineHeight: 1.6 }}
-              >
-                {f}
-              </li>
-            ))}
-          </ul>
-
-          <p
-            className="font-inter font-semibold text-primary mt-auto pt-10"
-            style={{ fontSize: "13px" }}
-          >
-            {s.price}
-          </p>
-        </article>
-      ))}
-    </div>
-  </Reveal>
+            See our work
+          </Link>
+        </div>
+      </div>
+    </AnimatedItem>
+  </AnimatedSection>
 );
 
+/* ─────────────────────────────────────────────
+   SECTION 2 — TICKER
+   ───────────────────────────────────────────── */
+const tickerItems = [
+  { text: "We Move The Needle", highlight: true },
+  { text: "Web Design", highlight: false },
+  { text: "UX Systems", highlight: false },
+  { text: "Dentists & Clinics", highlight: false },
+  { text: "Solicitors", highlight: false },
+  { text: "Accountants", highlight: false },
+  { text: "Cut The Noise", highlight: true },
+  { text: "Irish SMEs", highlight: false },
+];
+
+const TickerContent = () => (
+  <>
+    {tickerItems.map(({ text, highlight }, i) => (
+      <span key={i} className="flex items-center gap-4 shrink-0">
+        <span
+          className={`font-inter uppercase whitespace-nowrap ${highlight ? "font-bold" : "font-medium"}`}
+          style={{
+            fontSize: "9px",
+            letterSpacing: "0.22em",
+            color: highlight ? "hsl(var(--primary))" : "var(--mtmn-muted)",
+          }}
+        >
+          {text}
+        </span>
+        <span style={{ color: "var(--mtmn-muted)", fontSize: "9px" }}>·</span>
+      </span>
+    ))}
+  </>
+);
+
+const Ticker = () => (
+  <AnimatedSection
+    className="overflow-hidden py-2.5"
+    style={{
+      borderTop: "1px solid var(--mtmn-border)",
+      borderBottom: "1px solid var(--mtmn-border)",
+    }}
+  >
+    <div
+      className="flex gap-4"
+      style={{ animation: "ticker-scroll 30s linear infinite", width: "max-content" }}
+    >
+      <TickerContent />
+      <TickerContent />
+    </div>
+  </AnimatedSection>
+);
+
+/* ─────────────────────────────────────────────
+   SECTION 3 — STATEMENT
+   ───────────────────────────────────────────── */
+const Statement = () => (
+  <AnimatedSection className="grid md:grid-cols-2 gap-[60px] py-16 px-10 max-md:px-5" style={sectionBorder}>
+    <AnimatedItem>
+      <h2
+        className="font-inter font-extrabold uppercase text-primary"
+        style={{ fontSize: "clamp(30px, 3.5vw, 48px)", letterSpacing: "-0.03em", lineHeight: 1.05 }}
+      >
+        Built with you.
+        <br />
+        Not just for you.
+      </h2>
+    </AnimatedItem>
+    <AnimatedItem className="flex flex-col gap-6">
+      <p className="font-cormorant font-light text-secondary" style={{ fontSize: "21px", lineHeight: 1.65 }}>
+        From the first discovery call to going live, every decision is made together. Your images,
+        your story, your goals.
+      </p>
+      <p className="font-cormorant font-light text-secondary" style={{ fontSize: "21px", lineHeight: 1.65 }}>
+        We don't disappear after launch. We're your long-term digital partner for as long as you
+        need us.
+      </p>
+    </AnimatedItem>
+  </AnimatedSection>
+);
+
+/* ─────────────────────────────────────────────
+   SECTION 4 — SERVICES
+   ───────────────────────────────────────────── */
+const services = [
+  { num: "01", name: "Web Design & Build", tag: "Core" },
+  { num: "02", name: "UX & Booking Systems", tag: "Systems" },
+  { num: "03", name: "Ongoing Support", tag: "Always on" },
+];
+
+const Services = () => (
+  <AnimatedSection style={sectionBorder}>
+    {/* Label row */}
+    <AnimatedItem>
+      <div className="flex items-center justify-between px-10 max-md:px-5 pt-12 pb-6 max-md:flex-col max-md:items-start max-md:gap-3">
+        <span
+          className="font-inter font-medium text-[9px] uppercase"
+          style={{ letterSpacing: "0.22em", color: "var(--mtmn-muted)" }}
+        >
+          What we do
+        </span>
+        <span className="font-cormorant font-light italic text-secondary" style={{ fontSize: "18px" }}>
+          Three offerings. One outcome — your business performing better online.
+        </span>
+      </div>
+    </AnimatedItem>
+
+    {/* Rows */}
+    {services.map(({ num, name, tag }) => (
+      <AnimatedItem key={num}>
+        <Link
+          to="/services"
+          className="group flex items-center justify-between px-10 max-md:px-5 transition-colors duration-200"
+          style={{
+            borderBottom: "1px solid var(--mtmn-border)",
+            padding: "22px 40px",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--mtmn-hover-bg)")}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+        >
+          <div className="flex items-center gap-6 max-md:gap-4">
+            <span
+              className="font-cormorant font-light italic text-[14px]"
+              style={{ color: "var(--mtmn-muted)" }}
+            >
+              {num}
+            </span>
+            <span
+              className="font-inter font-extrabold uppercase text-primary"
+              style={{ fontSize: "22px", letterSpacing: "-0.02em" }}
+            >
+              {name}
+            </span>
+            <span
+              className="font-cormorant font-light italic text-[13px] px-3 py-1 max-md:hidden"
+              style={{
+                border: "1px solid var(--mtmn-border)",
+                borderRadius: "20px",
+                color: "var(--mtmn-muted)",
+              }}
+            >
+              {tag}
+            </span>
+          </div>
+          <ArrowUpRight
+            size={20}
+            className="transition-colors duration-200 group-hover:text-primary"
+            style={{ color: "var(--mtmn-dim)" }}
+          />
+        </Link>
+      </AnimatedItem>
+    ))}
+  </AnimatedSection>
+);
+
+/* ─────────────────────────────────────────────
+   SECTION 5 — WHO WE WORK WITH
+   ───────────────────────────────────────────── */
+const sectors = [
+  {
+    sector: "Healthcare",
+    title: "Dentists & Clinics",
+    desc: "Build trust before the first appointment. Your site should reflect the quality of your care.",
+  },
+  {
+    sector: "Legal & Finance",
+    title: "Solicitors & Accountants",
+    desc: "A premium digital presence that matches your professional reputation.",
+  },
+  {
+    sector: "Trade & Service",
+    title: "Irish SMEs",
+    desc: "Stop losing business to competitors with better websites. We fix that.",
+  },
+];
+
+const WhoWeWorkWith = () => (
+  <AnimatedSection style={sectionBorder}>
+    <AnimatedItem>
+      <h2
+        className="font-inter font-extrabold uppercase text-primary px-10 max-md:px-5 py-11"
+        style={{
+          fontSize: "clamp(26px, 3vw, 42px)",
+          letterSpacing: "-0.03em",
+          lineHeight: 1.05,
+          borderBottom: "1px solid var(--mtmn-border)",
+        }}
+      >
+        Built for Irish professionals
+        <br />
+        who help people.
+      </h2>
+    </AnimatedItem>
+    <div className="grid md:grid-cols-3">
+      {sectors.map(({ sector, title, desc }, i) => (
+        <AnimatedItem
+          key={sector}
+          className="py-8 px-9 max-md:px-5"
+          style={{
+            borderRight: i < 2 ? "1px solid var(--mtmn-border)" : "none",
+          }}
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <span className="block w-5 h-px" style={{ background: "var(--mtmn-muted)" }} />
+            <span
+              className="font-inter font-medium text-[9px] uppercase"
+              style={{ letterSpacing: "0.2em", color: "var(--mtmn-muted)" }}
+            >
+              {sector}
+            </span>
+          </div>
+          <h3
+            className="font-inter font-bold text-[13px] uppercase text-primary mb-3"
+            style={{ letterSpacing: "0.02em" }}
+          >
+            {title}
+          </h3>
+          <p className="font-cormorant font-light text-secondary" style={{ fontSize: "18px", lineHeight: 1.6 }}>
+            {desc}
+          </p>
+        </AnimatedItem>
+      ))}
+    </div>
+  </AnimatedSection>
+);
+
+/* ─────────────────────────────────────────────
+   SECTION 6 — FACTS
+   ───────────────────────────────────────────── */
+const facts = [
+  { number: "100", sup: "%", label: "Your assets. Your brand." },
+  { number: "0", sup: "×", label: "Cookie-cutter templates" },
+  { number: "∞", sup: "", label: "Long-term support" },
+];
+
+const Facts = () => (
+  <AnimatedSection
+    className="grid md:grid-cols-3"
+    style={{
+      borderTop: "1px solid var(--mtmn-border)",
+      borderBottom: "1px solid var(--mtmn-border)",
+    }}
+  >
+    {facts.map(({ number, sup, label }, i) => (
+      <AnimatedItem
+        key={number}
+        className="py-10 px-9 max-md:px-5"
+        style={{
+          borderRight: i < 2 ? "1px solid var(--mtmn-border)" : "none",
+        }}
+      >
+        <div className="flex items-start mb-3">
+          <span className="font-inter font-extralight text-primary" style={{ fontSize: "48px", lineHeight: 1 }}>
+            {number}
+          </span>
+          {sup && (
+            <span
+              className="font-inter font-extralight"
+              style={{ fontSize: "18px", color: "var(--mtmn-muted)", marginTop: "6px" }}
+            >
+              {sup}
+            </span>
+          )}
+        </div>
+        <p className="font-cormorant font-light italic text-secondary" style={{ fontSize: "17px", lineHeight: 1.5 }}>
+          {label}
+        </p>
+      </AnimatedItem>
+    ))}
+  </AnimatedSection>
+);
+
+/* ─────────────────────────────────────────────
+   SECTION 7 — CTA STRIP
+   ───────────────────────────────────────────── */
+const CtaStrip = () => (
+  <AnimatedSection
+    className="flex items-center justify-between px-10 max-md:px-5 py-20 max-md:flex-col max-md:items-start max-md:gap-10"
+    style={sectionBorder}
+  >
+    <AnimatedItem>
+      <h2
+        className="font-inter font-extrabold uppercase text-primary mb-4"
+        style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: 0.95, letterSpacing: "-0.03em" }}
+      >
+        Ready to stop looking
+        <br />
+        average online?
+      </h2>
+      <p className="font-cormorant font-light italic text-secondary" style={{ fontSize: "19px" }}>
+        No templates. No fluff. Just results.
+      </p>
+    </AnimatedItem>
+    <AnimatedItem>
+      <Link
+        to="/contact"
+        className="font-inter font-bold text-[10px] uppercase bg-primary text-primary-foreground transition-opacity duration-200 hover:opacity-85 shrink-0"
+        style={{ letterSpacing: "0.14em", padding: "12px 28px" }}
+      >
+        Book a discovery call
+      </Link>
+    </AnimatedItem>
+  </AnimatedSection>
+);
+
+/* ─────────────────────────────────────────────
+   HOME PAGE
+   ───────────────────────────────────────────── */
 const Index = () => (
   <main>
     <Hero />
-    <NicheBar />
+    <Ticker />
+    <Statement />
     <Services />
+    <WhoWeWorkWith />
+    <Facts />
+    <CtaStrip />
   </main>
 );
 
