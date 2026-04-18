@@ -1,4 +1,6 @@
 import { useState } from "react";
+import AnimatedSection from "@/components/motion/AnimatedSection";
+import AnimatedItem from "@/components/motion/AnimatedItem";
 
 const contactMethods = [
   { label: "WHATSAPP", detail: "Chat with us directly", href: "https://wa.me/353000000000", external: true },
@@ -55,22 +57,26 @@ const Contact = () => {
   return (
     <main>
       {/* Hero */}
-      <section className="py-16 px-10" style={{ borderBottom: "1px solid var(--mtmn-border)" }}>
-        <h1
-          className="font-inter font-black uppercase text-primary"
-          style={{ fontSize: "clamp(40px, 5vw, 72px)", letterSpacing: "-0.03em" }}
-        >
-          LET'S WORK TOGETHER
-        </h1>
-        <p className="font-cormorant font-light italic text-secondary mt-4" style={{ fontSize: "21px" }}>
-          Tell us about your project. We'll get back to you within 24 hours.
-        </p>
-      </section>
+      <AnimatedSection className="py-16 px-10" style={{ borderBottom: "1px solid var(--mtmn-border)" }}>
+        <AnimatedItem>
+          <h1
+            className="font-inter font-black uppercase text-primary"
+            style={{ fontSize: "clamp(40px, 5vw, 72px)", letterSpacing: "-0.03em" }}
+          >
+            LET'S WORK TOGETHER
+          </h1>
+        </AnimatedItem>
+        <AnimatedItem>
+          <p className="font-cormorant font-light italic text-secondary mt-4" style={{ fontSize: "21px" }}>
+            Tell us about your project. We'll get back to you within 24 hours.
+          </p>
+        </AnimatedItem>
+      </AnimatedSection>
 
       {/* Two-column layout */}
-      <section className="grid md:grid-cols-2" style={{ borderBottom: "1px solid var(--mtmn-border)" }}>
+      <AnimatedSection className="grid md:grid-cols-2" style={{ borderBottom: "1px solid var(--mtmn-border)" }}>
         {/* Left — Form */}
-        <div className="py-14 px-10" style={{ borderRight: "1px solid var(--mtmn-border)" }}>
+        <AnimatedItem className="py-14 px-10" style={{ borderRight: "1px solid var(--mtmn-border)" }}>
           <p
             className="font-inter font-medium uppercase mb-8"
             style={{ fontSize: "9px", letterSpacing: "0.22em", color: "var(--mtmn-muted)" }}
@@ -127,10 +133,10 @@ const Contact = () => {
               </button>
             </form>
           )}
-        </div>
+        </AnimatedItem>
 
         {/* Right — Contact Methods */}
-        <div className="py-14 px-10">
+        <AnimatedItem className="py-14 px-10">
           <p
             className="font-inter font-medium uppercase mb-8"
             style={{ fontSize: "9px", letterSpacing: "0.22em", color: "var(--mtmn-muted)" }}
@@ -162,8 +168,8 @@ const Contact = () => {
               </span>
             </a>
           ))}
-        </div>
-      </section>
+        </AnimatedItem>
+      </AnimatedSection>
     </main>
   );
 };
