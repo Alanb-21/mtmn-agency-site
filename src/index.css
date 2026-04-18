@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    /* MTMN Three-colour palette (HSL) */
-    --background: 0 0% 0%;
-    --foreground: 213 47% 91%;
+    /* MTMN Digital — exact spec */
+    --background: 0 0% 0%;            /* #000000 */
+    --foreground: 0 0% 100%;          /* #FFFFFF */
 
-    --primary: 213 47% 91%;
+    --card: 0 0% 5.1%;                /* #0D0D0D */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 213 47% 91%;           /* #DEE7F1 */
     --primary-foreground: 0 0% 0%;
 
     --secondary: 0 0% 100%;
     --secondary-foreground: 0 0% 0%;
 
-    --card: 0 0% 0%;
-    --card-foreground: 213 47% 91%;
-
-    --popover: 0 0% 0%;
-    --popover-foreground: 213 47% 91%;
-
-    --muted: 213 47% 91%;
-    --muted-foreground: 213 20% 55%;
+    --muted: 0 0% 5.1%;
+    --muted-foreground: 0 0% 62.7%;   /* #A0A0A0 */
 
     --accent: 213 47% 91%;
     --accent-foreground: 0 0% 0%;
@@ -29,29 +29,20 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Derived opacity borders/states — use via CSS custom properties */
-    --border: 213 20% 18%;
-    --input: 213 20% 18%;
+    --border: 0 0% 10.2%;             /* #1A1A1A */
+    --input: 0 0% 10.2%;
     --ring: 213 47% 91%;
 
     --radius: 0px;
 
-    /* Sidebar (unused Phase 1, but kept for shadcn compat) */
     --sidebar-background: 0 0% 0%;
-    --sidebar-foreground: 213 47% 91%;
+    --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 213 47% 91%;
     --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 213 20% 18%;
-    --sidebar-accent-foreground: 213 47% 91%;
-    --sidebar-border: 213 20% 18%;
+    --sidebar-accent: 0 0% 10.2%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 10.2%;
     --sidebar-ring: 213 47% 91%;
-
-    /* MTMN opacity tokens (raw rgba for direct use) */
-    --mtmn-border: rgba(222, 231, 241, 0.08);
-    --mtmn-ghost-stroke: rgba(222, 231, 241, 0.15);
-    --mtmn-muted: rgba(222, 231, 241, 0.35);
-    --mtmn-hover-bg: rgba(222, 231, 241, 0.03);
-    --mtmn-dim: rgba(222, 231, 241, 0.12);
   }
 }
 
@@ -71,11 +62,27 @@
   }
 }
 
-@keyframes ticker-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
+/* MTMN scroll-reveal — CSS only, IntersectionObserver-driven */
+@keyframes mtmn-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mtmn-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+.mtmn-reveal.is-visible {
+  animation: mtmn-fade-up 0.6s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mtmn-reveal,
+  .mtmn-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }

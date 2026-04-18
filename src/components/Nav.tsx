@@ -5,8 +5,8 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "Work", to: "/work" },
   { label: "Services", to: "/services" },
-  { label: "Process", to: "/process" },
   { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
 ];
 
 const Nav = () => {
@@ -15,55 +15,48 @@ const Nav = () => {
 
   return (
     <>
-      <header
-        className="sticky top-0 z-[100] w-full bg-background"
-        style={{ borderBottom: "1px solid var(--mtmn-border)" }}
-      >
-        <nav className="flex items-center justify-between h-14 px-10 max-md:px-5">
+      <header className="sticky top-0 z-[100] w-full bg-background border-b border-border">
+        <nav className="flex items-center justify-between h-16 px-10 max-md:px-5">
           {/* Logo */}
           <Link
             to="/"
-            className="font-inter font-black uppercase text-primary text-sm"
-            style={{ letterSpacing: "0.28em" }}
+            className="font-inter font-extrabold uppercase text-foreground text-sm"
+            style={{ letterSpacing: "0.18em" }}
           >
-            MTMN
+            MTMN DIGITAL
           </Link>
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map(({ label, to }) => (
-              <Link
-                key={to}
-                to={to}
-                className="font-inter font-normal uppercase text-[10px] transition-colors duration-200"
-                style={{
-                  letterSpacing: "0.08em",
-                  color: pathname === to ? "hsl(var(--primary))" : "var(--mtmn-muted)",
-                }}
-                onMouseEnter={(e) => {
-                  if (pathname !== to) e.currentTarget.style.color = "hsl(var(--primary))";
-                }}
-                onMouseLeave={(e) => {
-                  if (pathname !== to) e.currentTarget.style.color = "var(--mtmn-muted)";
-                }}
-              >
-                {label}
-              </Link>
-            ))}
+            {navLinks.map(({ label, to }) => {
+              const active = pathname === to;
+              return (
+                <Link
+                  key={to}
+                  to={to}
+                  className={`font-inter font-medium uppercase text-[13px] transition-colors duration-200 ${
+                    active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  style={{ letterSpacing: "0.08em" }}
+                >
+                  {label}
+                </Link>
+              );
+            })}
 
-            {/* CTA */}
+            {/* CTA button */}
             <Link
               to="/contact"
-              className="font-inter font-medium uppercase text-[10px] text-primary transition-opacity duration-200 hover:opacity-80"
-              style={{ letterSpacing: "0.08em" }}
+              className="bg-primary text-primary-foreground font-inter font-bold uppercase text-[13px] transition-opacity duration-200 hover:opacity-90"
+              style={{ letterSpacing: "0.08em", padding: "14px 32px" }}
             >
-              Let's work together
+              Book a Call
             </Link>
           </div>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden text-primary"
+            className="md:hidden text-foreground"
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
           >
@@ -76,7 +69,7 @@ const Nav = () => {
       {mobileOpen && (
         <div className="fixed inset-0 z-[200] bg-background flex flex-col items-center justify-center">
           <button
-            className="absolute top-4 right-5 text-primary"
+            className="absolute top-4 right-5 text-foreground"
             onClick={() => setMobileOpen(false)}
             aria-label="Close menu"
           >
@@ -89,10 +82,9 @@ const Nav = () => {
                 key={to}
                 to={to}
                 onClick={() => setMobileOpen(false)}
-                className="font-inter font-bold uppercase text-2xl tracking-widest transition-colors duration-200"
-                style={{
-                  color: pathname === to ? "hsl(var(--primary))" : "var(--mtmn-muted)",
-                }}
+                className={`font-inter font-bold uppercase text-2xl tracking-widest ${
+                  pathname === to ? "text-foreground" : "text-muted-foreground"
+                }`}
               >
                 {label}
               </Link>
@@ -101,9 +93,10 @@ const Nav = () => {
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
-              className="font-inter font-medium uppercase text-lg text-primary tracking-widest mt-4"
+              className="bg-primary text-primary-foreground font-inter font-bold uppercase text-sm mt-4"
+              style={{ letterSpacing: "0.08em", padding: "14px 32px" }}
             >
-              Let's work together
+              Book a Call
             </Link>
           </div>
         </div>
