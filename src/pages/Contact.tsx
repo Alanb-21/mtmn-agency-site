@@ -1,6 +1,5 @@
 import { useState } from "react";
-import AnimatedSection from "@/components/motion/AnimatedSection";
-import AnimatedItem from "@/components/motion/AnimatedItem";
+import Reveal from "@/components/Reveal";
 
 const contactMethods = [
   { label: "WHATSAPP", detail: "Chat with us directly", href: "https://wa.me/353000000000", external: true },
@@ -44,7 +43,7 @@ const Contact = () => {
   };
 
   const inputClass =
-    "w-full bg-transparent py-3 font-cormorant font-light text-secondary text-lg outline-none border-0 border-b rounded-none focus:border-primary transition-colors";
+    "w-full bg-transparent py-3 font-cormorant text-foreground text-lg outline-none border-0 border-b border-border focus:border-primary transition-colors";
 
   const fields: { key: keyof FormData; label: string; required: boolean; textarea?: boolean }[] = [
     { key: "fullName", label: "FULL NAME", required: true },
@@ -56,37 +55,30 @@ const Contact = () => {
 
   return (
     <main>
-      {/* Hero */}
-      <AnimatedSection className="py-16 px-10" style={{ borderBottom: "1px solid var(--mtmn-border)" }}>
-        <AnimatedItem>
-          <h1
-            className="font-inter font-black uppercase text-primary"
-            style={{ fontSize: "clamp(40px, 5vw, 72px)", letterSpacing: "-0.03em" }}
-          >
-            LET'S WORK TOGETHER
-          </h1>
-        </AnimatedItem>
-        <AnimatedItem>
-          <p className="font-cormorant font-light italic text-secondary mt-4" style={{ fontSize: "21px" }}>
-            Tell us about your project. We'll get back to you within 24 hours.
-          </p>
-        </AnimatedItem>
-      </AnimatedSection>
+      <Reveal as="section" className="py-16 px-10 border-b border-border">
+        <h1
+          className="font-inter font-black uppercase text-foreground"
+          style={{ fontSize: "clamp(40px, 5vw, 72px)", letterSpacing: "-0.03em" }}
+        >
+          LET'S WORK TOGETHER
+        </h1>
+        <p className="font-cormorant italic text-muted-foreground mt-4" style={{ fontSize: "21px" }}>
+          Tell us about your project. We'll get back to you within 24 hours.
+        </p>
+      </Reveal>
 
-      {/* Two-column layout */}
-      <AnimatedSection className="grid md:grid-cols-2" style={{ borderBottom: "1px solid var(--mtmn-border)" }}>
-        {/* Left — Form */}
-        <AnimatedItem className="py-14 px-10" style={{ borderRight: "1px solid var(--mtmn-border)" }}>
+      <Reveal as="section" className="grid md:grid-cols-2 border-b border-border">
+        <div className="py-14 px-10 md:border-r md:border-border">
           <p
-            className="font-inter font-medium uppercase mb-8"
-            style={{ fontSize: "9px", letterSpacing: "0.22em", color: "var(--mtmn-muted)" }}
+            className="font-inter font-medium uppercase mb-8 text-muted-foreground"
+            style={{ fontSize: "9px", letterSpacing: "0.22em" }}
           >
             SEND AN ENQUIRY
           </p>
 
           {submitted ? (
             <div className="flex items-center justify-center py-20">
-              <p className="font-cormorant font-light italic text-secondary text-center" style={{ fontSize: "21px" }}>
+              <p className="font-cormorant italic text-muted-foreground text-center" style={{ fontSize: "21px" }}>
                 Thank you. We'll be in touch within 24 hours.
               </p>
             </div>
@@ -95,7 +87,7 @@ const Contact = () => {
               {fields.map(({ key, label, textarea }) => (
                 <div key={key} className="mb-6">
                   <label
-                    className="font-inter font-medium uppercase text-primary block mb-1.5"
+                    className="font-inter font-medium uppercase text-foreground block mb-1.5"
                     style={{ fontSize: "10px", letterSpacing: "0.14em" }}
                   >
                     {label}
@@ -106,7 +98,7 @@ const Contact = () => {
                       value={form[key]}
                       onChange={(e) => update(key, e.target.value)}
                       className={inputClass}
-                      style={{ borderBottomColor: errors[key] ? "rgba(222,231,241,0.5)" : "var(--mtmn-border)", resize: "vertical" }}
+                      style={{ resize: "vertical" }}
                     />
                   ) : (
                     <input
@@ -114,11 +106,10 @@ const Contact = () => {
                       value={form[key]}
                       onChange={(e) => update(key, e.target.value)}
                       className={inputClass}
-                      style={{ borderBottomColor: errors[key] ? "rgba(222,231,241,0.5)" : "var(--mtmn-border)" }}
                     />
                   )}
                   {errors[key] && (
-                    <p className="font-cormorant font-light italic mt-1" style={{ fontSize: "14px", color: "rgba(222,231,241,0.5)" }}>
+                    <p className="font-cormorant italic mt-1 text-muted-foreground" style={{ fontSize: "14px" }}>
                       {errors[key]}
                     </p>
                   )}
@@ -126,20 +117,19 @@ const Contact = () => {
               ))}
               <button
                 type="submit"
-                className="w-full bg-primary text-background font-inter font-bold uppercase py-4 mt-8 rounded-none"
-                style={{ fontSize: "10px", letterSpacing: "0.14em" }}
+                className="w-full bg-primary text-primary-foreground font-inter font-bold uppercase mt-8 hover:opacity-90 transition-opacity"
+                style={{ fontSize: "13px", letterSpacing: "0.08em", padding: "14px 32px" }}
               >
                 SEND ENQUIRY
               </button>
             </form>
           )}
-        </AnimatedItem>
+        </div>
 
-        {/* Right — Contact Methods */}
-        <AnimatedItem className="py-14 px-10">
+        <div className="py-14 px-10">
           <p
-            className="font-inter font-medium uppercase mb-8"
-            style={{ fontSize: "9px", letterSpacing: "0.22em", color: "var(--mtmn-muted)" }}
+            className="font-inter font-medium uppercase mb-8 text-muted-foreground"
+            style={{ fontSize: "9px", letterSpacing: "0.22em" }}
           >
             OR REACH OUT DIRECTLY
           </p>
@@ -150,26 +140,21 @@ const Contact = () => {
               href={m.href}
               target={m.external ? "_blank" : undefined}
               rel={m.external ? "noopener noreferrer" : undefined}
-              className="flex justify-between items-center py-5 group transition-colors"
-              style={{ borderBottom: "1px solid var(--mtmn-border)", backgroundColor: "transparent" }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(222,231,241,0.03)")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+              className="flex justify-between items-center py-5 group border-b border-border hover:bg-card transition-colors"
             >
               <div>
-                <p className="font-inter font-medium uppercase text-primary" style={{ fontSize: "10px", letterSpacing: "0.14em" }}>
+                <p className="font-inter font-medium uppercase text-foreground" style={{ fontSize: "10px", letterSpacing: "0.14em" }}>
                   {m.label}
                 </p>
-                <p className="font-cormorant font-light italic text-secondary mt-1" style={{ fontSize: "18px" }}>
+                <p className="font-cormorant italic text-muted-foreground mt-1" style={{ fontSize: "18px" }}>
                   {m.detail}
                 </p>
               </div>
-              <span className="transition-colors" style={{ color: "var(--mtmn-muted)" }}>
-                <span className="group-hover:text-primary transition-colors">↗</span>
-              </span>
+              <span className="text-muted-foreground group-hover:text-foreground transition-colors">↗</span>
             </a>
           ))}
-        </AnimatedItem>
-      </AnimatedSection>
+        </div>
+      </Reveal>
     </main>
   );
 };
