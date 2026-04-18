@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import AnimatedSection from "@/components/motion/AnimatedSection";
-import AnimatedItem from "@/components/motion/AnimatedItem";
+import Reveal from "@/components/Reveal";
 
 const services = [
   {
@@ -44,128 +43,82 @@ const services = [
 const Services = () => {
   return (
     <main>
-      {/* Hero */}
-      <AnimatedSection
-        className="py-16 px-10 max-md:px-5"
-        style={{ borderBottom: "1px solid var(--mtmn-border)" }}
-      >
-        <AnimatedItem>
-          <h1
-            className="font-inter font-extrabold uppercase text-primary"
-            style={{
-              fontSize: "clamp(36px, 5vw, 64px)",
-              letterSpacing: "-0.03em",
-              lineHeight: 1,
-            }}
-          >
-            What We Do
-          </h1>
-        </AnimatedItem>
-        <AnimatedItem>
-          <p
-            className="font-cormorant font-light italic text-secondary mt-4"
-            style={{ fontSize: "21px" }}
-          >
-            Three services. One goal — your business performing better online.
-          </p>
-        </AnimatedItem>
-      </AnimatedSection>
-
-      {/* Service sections */}
-      {services.map((s) => (
-        <AnimatedSection
-          key={s.num}
-          className="py-14 px-10 max-md:px-5"
-          style={{ borderBottom: "1px solid var(--mtmn-border)" }}
+      <Reveal as="section" className="py-16 px-10 max-md:px-5 border-b border-border">
+        <h1
+          className="font-inter font-extrabold uppercase text-foreground"
+          style={{ fontSize: "clamp(36px, 5vw, 64px)", letterSpacing: "-0.03em", lineHeight: 1 }}
         >
-          <AnimatedItem>
-            <div className="flex items-baseline gap-4 mb-6">
-              <span
-                className="font-cormorant font-light italic"
-                style={{ color: "var(--mtmn-muted)", fontSize: "18px" }}
-              >
-                {s.num}
-              </span>
-              <h2
-                className="font-inter font-extrabold uppercase text-primary"
-                style={{ fontSize: "clamp(20px, 2.5vw, 26px)", letterSpacing: "-0.02em" }}
-              >
-                {s.name}
-              </h2>
-            </div>
-          </AnimatedItem>
+          What We Do
+        </h1>
+        <p className="font-cormorant italic text-muted-foreground mt-4" style={{ fontSize: "21px" }}>
+          Three services. One goal — your business performing better online.
+        </p>
+      </Reveal>
 
-          <AnimatedItem>
-            <p
-              className="font-cormorant font-light text-secondary max-w-[680px] mb-8"
-              style={{ fontSize: "21px", lineHeight: 1.65 }}
-            >
-              {s.description}
-            </p>
-          </AnimatedItem>
-
-          <AnimatedItem>
-            <span
-              className="font-inter font-medium uppercase block mb-4"
-              style={{
-                fontSize: "9px",
-                letterSpacing: "0.22em",
-                color: "var(--mtmn-muted)",
-              }}
-            >
-              What's included
+      {services.map((s) => (
+        <Reveal as="section" key={s.num} className="py-14 px-10 max-md:px-5 border-b border-border">
+          <div className="flex items-baseline gap-4 mb-6">
+            <span className="font-cormorant italic text-muted-foreground" style={{ fontSize: "18px" }}>
+              {s.num}
             </span>
+            <h2
+              className="font-inter font-extrabold uppercase text-foreground"
+              style={{ fontSize: "clamp(20px, 2.5vw, 26px)", letterSpacing: "-0.02em" }}
+            >
+              {s.name}
+            </h2>
+          </div>
 
-            <ul className="flex flex-col gap-2">
-              {s.items.map((item) => (
-                <li key={item} className="flex items-center gap-3">
-                  <span
-                    className="block w-4 h-px"
-                    style={{ background: "var(--mtmn-muted)" }}
-                  />
-                  <span
-                    className="font-cormorant font-light italic text-secondary"
-                    style={{ fontSize: "18px" }}
-                  >
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </AnimatedItem>
-        </AnimatedSection>
+          <p
+            className="font-cormorant text-muted-foreground max-w-[680px] mb-8"
+            style={{ fontSize: "21px", lineHeight: 1.65 }}
+          >
+            {s.description}
+          </p>
+
+          <span
+            className="font-inter font-medium uppercase block mb-4 text-muted-foreground"
+            style={{ fontSize: "9px", letterSpacing: "0.22em" }}
+          >
+            What's included
+          </span>
+
+          <ul className="flex flex-col gap-2">
+            {s.items.map((item) => (
+              <li key={item} className="flex items-center gap-3">
+                <span className="block w-4 h-px bg-muted-foreground" />
+                <span className="font-cormorant italic text-muted-foreground" style={{ fontSize: "18px" }}>
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       ))}
 
-      {/* CTA Strip */}
-      <AnimatedSection className="py-16 px-10 max-md:px-5 flex items-center justify-between max-md:flex-col max-md:gap-6 max-md:text-center">
-        <AnimatedItem>
+      <Reveal
+        as="section"
+        className="py-16 px-10 max-md:px-5 flex items-center justify-between max-md:flex-col max-md:gap-6 max-md:text-center"
+      >
+        <div>
           <h2
-            className="font-inter font-extrabold uppercase text-primary"
-            style={{
-              fontSize: "clamp(28px, 4vw, 52px)",
-              letterSpacing: "-0.03em",
-              lineHeight: 0.95,
-            }}
+            className="font-inter font-extrabold uppercase text-foreground"
+            style={{ fontSize: "clamp(28px, 4vw, 52px)", letterSpacing: "-0.03em", lineHeight: 0.95 }}
           >
             Ready to start?
           </h2>
-          <p
-            className="font-cormorant font-light italic text-secondary mt-2"
-            style={{ fontSize: "19px" }}
-          >
+          <p className="font-cormorant italic text-muted-foreground mt-2" style={{ fontSize: "19px" }}>
             No templates. No fluff. Just results.
           </p>
-        </AnimatedItem>
-        <AnimatedItem>
-          <Link
-            to="/contact"
-            className="font-inter font-bold uppercase text-[10px] bg-primary text-primary-foreground px-6 py-3 transition-opacity duration-200 hover:opacity-90"
-            style={{ letterSpacing: "0.12em" }}
-          >
-            Book a discovery call
-          </Link>
-        </AnimatedItem>
-      </AnimatedSection>
+        </div>
+        <Link
+          to="/contact"
+          className="font-inter font-bold uppercase text-[13px] bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+          style={{ letterSpacing: "0.08em", padding: "14px 32px" }}
+        >
+          Book a discovery call
+        </Link>
+      </Reveal>
     </main>
   );
 };
